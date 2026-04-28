@@ -1,3 +1,3 @@
-opsDesk :- 
+opsDesk :-
 
-opsDesk is a multi tenent SaaS management System
+opsDesk is a multi tenant SaaS management System
