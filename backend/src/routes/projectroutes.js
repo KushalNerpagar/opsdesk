@@ -24,4 +24,19 @@ router.get("/", authMiddleware, async (req, res) => {
   res.json(projects);
 });
 
+router.get("/:id", authMiddleware, async (req, res) => {
+  const project = await prisma.project.findUnique({
+    where: {
+      id: parseInt(req.params.id),
+    },
+  });
+  if (!project) {
+    return res.status(404).json({ message: "Project not found" });
+  }
+  if (project.userId !== req.user.userId) {
+    return res.status(403).json({ message: "Unauthorized access" });
+  }
+  res.json(project);
+});
+
 export default router;
